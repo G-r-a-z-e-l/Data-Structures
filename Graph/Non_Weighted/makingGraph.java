@@ -119,3 +119,37 @@ public class makingGraph {
         
        }
 }
+
+//Breadth First Search
+public static class pair{
+    int vtx;
+    String psf;
+    
+   public pair(int vtx,String psf){
+        this.vtx = vtx;
+        this.psf = psf;
+    }
+}
+
+public static void bfs(ArrayList<Integer>[] graph,int src){
+    
+    LinkedList<pair> q = new LinkedList<>();
+    boolean[] visited = new boolean[graph.length];
+    q.add(new pair(src,src+""));
+    
+    while(!q.isEmpty()){
+        pair removed = q.removeFirst();
+         
+         if(visited[removed.vtx] == true){
+             continue;
+         }   
+         visited[removed.vtx] = true;
+         System.out.println(removed.vtx +"@"+removed.psf);
+         for(int neigh : graph[removed.vtx]){
+             if(visited[neigh]==false){
+                 q.add(new pair(neigh,removed.psf+neigh+""));
+             }
+         }
+    }
+    
+}
